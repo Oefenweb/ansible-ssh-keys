@@ -1,0 +1,18 @@
+---
+# meta file for ssh-keys
+galaxy_info:
+  author: Mischa ter Smitten
+  company: Oefenweb.nl B.V.
+  description: Manage ssh authorized keys and known hosts in Debian-like systems.
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+dependencies: []

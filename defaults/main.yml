@@ -1,0 +1,5 @@
+---
+# defaults file for ssh-keys
+ssh_keys_users: []
+
+ssh_keys_known_hosts: []
