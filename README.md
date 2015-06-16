@@ -1,6 +1,6 @@
 ## ssh
 
-Manage ssh authorized keys and known hosts.
+Manage ssh authorized keys and known hosts in Debian-like systems.
 
 #### Requirements
 
