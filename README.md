@@ -1,4 +1,4 @@
-## ssh
+## ssh-keys
 
 Manage ssh authorized keys and known hosts in Debian-like systems.
 
