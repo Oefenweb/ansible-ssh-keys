@@ -1,5 +1,5 @@
----
 # tasks file for ssh-keys
+---
 - name: Set up authorized_keys for users
   authorized_key: user="{{ item.0.name }}"
                   key="{{ lookup('file', item.1.key) }}"
