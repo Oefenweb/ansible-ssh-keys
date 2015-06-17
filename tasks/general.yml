@@ -1,0 +1,11 @@
+# tasks file for ssh-keys
+---
+- name: create ssh directory
+  file:
+    path: "{{ item.home }}/{{ ssh_keys_sshdir }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group | default(item.owner) }}"
+    mode: 0700
+  with_items: ssh_keys_users
+  tags: [configuration, ssh-keys]

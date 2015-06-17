@@ -3,7 +3,7 @@
 galaxy_info:
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
-  description: Manage ssh authorized keys and known hosts in Debian-like systems
+  description: Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems
   license: MIT
   min_ansible_version: 1.4
   platforms:
@@ -18,4 +18,5 @@ galaxy_info:
     - wheezy
   categories:
   - system
+  - networking
 dependencies: []

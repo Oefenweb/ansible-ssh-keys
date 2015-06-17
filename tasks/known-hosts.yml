@@ -1,0 +1,10 @@
+# tasks file for ssh-keys
+---
+- name: update known_hosts file
+  template:
+    src: etc/ssh/ssh_known_hosts.j2
+    dest: /etc/ssh/ssh_known_hosts
+    owner: root
+    group: root
+    mode: 0644
+  tags: [configuration, ssh-keys, ssh-keys-known-hosts]

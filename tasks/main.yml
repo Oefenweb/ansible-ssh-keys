@@ -1,20 +1,7 @@
 # tasks file for ssh-keys
 ---
-- name: set up authorized_keys for users
-  authorized_key:
-    user: "{{ item.0.name }}"
-    key: "{{ lookup('file', item.1.key) }}"
-    state: "{{ item.1.state | default('present') }}"
-  with_subelements:
-    - ssh_keys_users
-    - authorized_keys
-  tags: [configuration, ssh-keys, ssh-keys-authorized-keys]
-
-- name: update known_hosts file
-  template:
-    src: etc/ssh/ssh_known_hosts.j2
-    dest: /etc/ssh/ssh_known_hosts
-    owner: root
-    group: root
-    mode: 0644
-  tags: [configuration, ssh-keys, ssh-keys-known-hosts]
+- include: general.yml
+- include: private-keys.yml
+- include: public-keys.yml
+- include: authorized-keys.yml
+- include: known-hosts.yml
