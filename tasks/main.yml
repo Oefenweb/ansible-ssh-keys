@@ -1,0 +1,7 @@
+# tasks file for ssh-keys
+---
+- include: general.yml
+- include: private-keys.yml
+- include: public-keys.yml
+- include: authorized-keys.yml
+- include: known-hosts.yml

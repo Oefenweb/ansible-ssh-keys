@@ -1,0 +1,24 @@
+# tasks file for ssh-keys
+---
+- name: add public keys
+  copy:
+    src: "{{ item.1.src }}"
+    dest: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
+    owner: "{{ item.0.owner }}"
+    group: "{{ item.0.group | default(item.0.owner) }}"
+    mode: 0644
+  with_subelements:
+    - ssh_keys_users
+    - public_keys
+  when: item.1.state == 'present'
+  tags: [configuration, ssh-keys, ssh-keys-public-keys]
+
+- name: remove public keys
+  file:
+    path: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
+    state: absent
+  with_subelements:
+    - ssh_keys_users
+    - public_keys
+  when: item.1.state == 'absent'
+  tags: [configuration, ssh-keys, ssh-keys-public-keys]

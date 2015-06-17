@@ -1,0 +1,3 @@
+{% for item in ssh_keys_known_hosts %}
+{{ item.hostname }} {{ item.enctype }} {{ item.fingerprint }}
+{% endfor %}

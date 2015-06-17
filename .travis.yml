@@ -1,0 +1,69 @@
+---
+language: python
+python: "2.7"
+
+env:
+  - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=1.9.1
+  - ANSIBLE_VERSION=1.9.0.1
+  - ANSIBLE_VERSION=1.8.4
+  - ANSIBLE_VERSION=1.8.3
+  - ANSIBLE_VERSION=1.8.2
+  - ANSIBLE_VERSION=1.8.1
+  - ANSIBLE_VERSION=1.8
+  - ANSIBLE_VERSION=1.7.2
+  - ANSIBLE_VERSION=1.7.1
+  - ANSIBLE_VERSION=1.7
+  - ANSIBLE_VERSION=1.6.9
+  - ANSIBLE_VERSION=1.6.8
+  - ANSIBLE_VERSION=1.6.7
+  - ANSIBLE_VERSION=1.6.6
+  - ANSIBLE_VERSION=1.6.5
+  - ANSIBLE_VERSION=1.6.4
+  - ANSIBLE_VERSION=1.6.3
+  - ANSIBLE_VERSION=1.6.2
+  - ANSIBLE_VERSION=1.6.10
+  - ANSIBLE_VERSION=1.6.1
+  - ANSIBLE_VERSION=1.6
+  - ANSIBLE_VERSION=1.5.5
+  - ANSIBLE_VERSION=1.5.4
+  - ANSIBLE_VERSION=1.5.3
+  - ANSIBLE_VERSION=1.5.2
+  - ANSIBLE_VERSION=1.5.1
+  - ANSIBLE_VERSION=1.5
+  - ANSIBLE_VERSION=1.4.5
+  - ANSIBLE_VERSION=1.4.4
+  - ANSIBLE_VERSION=1.4.3
+  - ANSIBLE_VERSION=1.4.2
+  - ANSIBLE_VERSION=1.4.1
+  - ANSIBLE_VERSION=1.4
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  # Install Ansible.
+  - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
+
+  # Add ansible.cfg to pick up roles path.
+  - printf "[defaults]\nroles_path = ../" > ansible.cfg
+
+script:
+  # Check the role/playbook's syntax.
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo -vvvv
+
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+notifications:
+  email: false
+  hipchat:
+    rooms:
+      secure: mEuqxFx3d1A6dRmhvjK3Ky5sm7I6zPnlIgHycwRsV1hSIid3I3aXcW7yMB8eu+y025OF1DYAB9R0rxUIwNxF96S6t3+121cE+a7D3ryX4rGNYzZg87kA4N/U3vclZip72Et31rGXAt5uYZ35Oy0ftMh8ojT/2xbjU3YatNtUlBdIw0nUhCxmeZZfOAmcb4Sh0XmGtEgfKRQLoGb01L70yXAdykvSmKjPoH0iwZ//cne24fRc9pCmY9cVQYZvYOLSeLBSXPrx4NqCv4PdDQeaec9fz6m0pJuVcJwUVXj+4dfG8QB64lqiwgTtBHf0JI/pcTabbPYblQa+tclQPpLV+hIMTpi3iEkNFTQxMwQDZ2x6YYW/2TV8vgF+cROlx+4FBJbzljAUw9XXylL/3FqaAcvpcwNkDo2AmyiFGHKsVZYz3Y8FG+4dBAWjCKK/dB4vwldgz6zxgXGVREDdfIUsyY5PSqhGtnW9JOaYylr9zfAJrBvEo/n0MoLTmI4bV8C7Om2G645NU/H/4/3u7GvfwCXPR7DqUfQ9Onz+2eWfHYm0qeBc+9hBzTNb2o5pnJVccc9jWsq4Fn6oL/OtRERw2BuVqqj5GiAlcO2s8fm29A92AFYkqbAVY0gLsxGi3OJ6629S1P9Rzw3rCddGd/dQqsNDvqRriE5XrtZlA/jzoVQ=

@@ -1,0 +1,3 @@
+# vars file for ssh-keys
+---
+ssh_keys_sshdir: '.ssh'
