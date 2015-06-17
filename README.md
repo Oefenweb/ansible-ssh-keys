@@ -44,7 +44,7 @@ None
   - ssh-keys
   vars:
     ssh_keys_users:
-      - name: root
+      - owner: root
         home: /root
         private_keys:
           - src: ../../../files/ssh-keys/id_rsa
