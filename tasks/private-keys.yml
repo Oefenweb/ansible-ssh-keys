@@ -1,5 +1,10 @@
 # tasks file for ssh-keys
 ---
+- name: filter users with private_keys attribute
+  set_fact:
+    ssh_keys_users_with_private_keys: "{{ ssh_keys_users | selectattr('private_keys', 'defined') | list }}"
+  tags: [configuration, ssh-keys, ssh-keys-private-keys]
+
 - name: add private keys
   copy:
     src: "{{ item.1.src }}"
@@ -8,7 +13,7 @@
     group: "{{ item.0.group | default(item.0.owner) }}"
     mode: 0600
   with_subelements:
-    - ssh_keys_users
+    - ssh_keys_users_with_private_keys
     - private_keys
   when: item.1.state == 'present'
   tags: [configuration, ssh-keys, ssh-keys-private-keys]
@@ -18,7 +23,7 @@
     path: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
     state: absent
   with_subelements:
-    - ssh_keys_users
+    - ssh_keys_users_with_private_keys
     - private_keys
   when: item.1.state == 'absent'
   tags: [configuration, ssh-keys, ssh-keys-private-keys]
