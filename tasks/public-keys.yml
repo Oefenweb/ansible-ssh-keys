@@ -8,7 +8,7 @@
     group: "{{ item.group | default(item.owner) }}"
     mode: 0644
   with_items: ssh_keys_public_keys
-  when: item.state == 'present'
+  when: item.state is undefined or item.state == 'present'
   tags: [configuration, ssh-keys, ssh-keys-public-keys]
 
 - name: remove public keys
@@ -16,5 +16,5 @@
     path: "{{ item.home }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
     state: absent
   with_items: ssh_keys_public_keys
-  when: item.state == 'absent'
+  when: item.state is defined and item.state == 'absent'
   tags: [configuration, ssh-keys, ssh-keys-public-keys]
