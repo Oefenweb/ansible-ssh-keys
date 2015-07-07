@@ -1,3 +1,7 @@
 # vars file for ssh-keys
 ---
 ssh_keys_sshdir: '.ssh'
+
+ssh_keys_private_key_filename: 'blabla-id_rsa'
+
+ssh_keys_public_key_filename: 'blabla-id_rsa.pub'
