@@ -71,10 +71,16 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Check presence of private key.
-  - sudo diff files/id_rsa ~root/.ssh/id_rsa
+  - >
+    sudo diff files/id_rsa ~root/.ssh/id_rsa
+    && (echo 'Private key test: pass' && exit 0)
+    || (echo 'Private key test: fail' && exit 1)
 
   # Check presence of public key.
-  - sudo diff files/id_rsa.pub ~root/.ssh/id_rsa.pub
+  - >
+    sudo diff files/id_rsa.pub ~root/.ssh/id_rsa.pub
+    && (echo 'Public key test: pass' && exit 0)
+    || (echo 'Public key test: fail' && exit 1)
 
 notifications:
   email: false
