@@ -1,5 +1,6 @@
 # defaults file for ssh-keys
 ---
-ssh_keys_users: []
-
+ssh_keys_private_keys: []
+ssh_keys_public_keys: []
+ssh_keys_authorized_keys: []
 ssh_keys_known_hosts: []

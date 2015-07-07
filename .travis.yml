@@ -4,6 +4,7 @@ python: "2.7"
 
 env:
   - ANSIBLE_VERSION=latest
+  - ANSIBLE_VERSION=1.9.2
   - ANSIBLE_VERSION=1.9.1
   - ANSIBLE_VERSION=1.9.0.1
   - ANSIBLE_VERSION=1.8.4
@@ -45,6 +46,9 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
+  # Generate ssh key
+  - ssh-keygen -t rsa -b 2048 -C '' -P '' -f files/id_rsa -q
+
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
@@ -65,6 +69,24 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Check presence of private key.
+  - >
+    sudo diff files/id_rsa ~root/.ssh/id_rsa
+    && (echo 'Private key test: pass' && exit 0)
+    || (echo 'Private key test: fail' && exit 1)
+
+  # Check presence of public key.
+  - >
+    sudo diff files/id_rsa.pub ~root/.ssh/id_rsa.pub
+    && (echo 'Public key test: pass' && exit 0)
+    || (echo 'Public key test: fail' && exit 1)
+
+  # Check presence of known hosts.
+  - >
+    grep -q 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa' /etc/ssh/ssh_known_hosts
+    && (echo 'Known hosts test: pass' && exit 0)
+    || (echo 'Known hosts test: fail' && exit 1)
 
 notifications:
   email: false
