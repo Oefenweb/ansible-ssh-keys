@@ -2,23 +2,19 @@
 ---
 - name: add public keys
   copy:
-    src: "{{ item.1.src }}"
-    dest: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
-    owner: "{{ item.0.owner }}"
-    group: "{{ item.0.group | default(item.0.owner) }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.home }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group | default(item.owner) }}"
     mode: 0644
-  with_subelements:
-    - ssh_keys_users
-    - public_keys
+  with_items: ssh_keys_public_keys
   when: item.1.state == 'present'
   tags: [configuration, ssh-keys, ssh-keys-public-keys]
 
 - name: remove public keys
   file:
-    path: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
+    path: "{{ item.home }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
     state: absent
-  with_subelements:
-    - ssh_keys_users
-    - public_keys
-  when: item.1.state == 'absent'
+  with_items: ssh_keys_public_keys
+  when: item.state == 'absent'
   tags: [configuration, ssh-keys, ssh-keys-public-keys]

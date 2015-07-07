@@ -2,23 +2,19 @@
 ---
 - name: add private keys
   copy:
-    src: "{{ item.1.src }}"
-    dest: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
-    owner: "{{ item.0.owner }}"
-    group: "{{ item.0.group | default(item.0.owner) }}"
+    src: "{{ item.src }}"
+    dest: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group | default(item.owner) }}"
     mode: 0600
-  with_subelements:
-    - ssh_keys_users
-    - private_keys
-  when: item.1.state == 'present'
+  with_items: ssh_keys_private_keys
+  when: item.state == 'present'
   tags: [configuration, ssh-keys, ssh-keys-private-keys]
 
 - name: remove private keys
   file:
-    path: "{{ item.0.home }}/{{ ssh_keys_sshdir }}/{{ item.1.dest }}"
+    path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
     state: absent
-  with_subelements:
-    - ssh_keys_users
-    - private_keys
-  when: item.1.state == 'absent'
+  with_items: ssh_keys_private_keys
+  when: item.state == 'absent'
   tags: [configuration, ssh-keys, ssh-keys-private-keys]

@@ -7,5 +7,15 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
-  with_items: ssh_keys_users
+  with_items: ssh_keys_private_keys
+  tags: [configuration, ssh-keys]
+
+- name: create ssh directory
+  file:
+    path: "{{ item.home }}/{{ ssh_keys_sshdir }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group | default(item.owner) }}"
+    mode: 0700
+  with_items: ssh_keys_public_keys
   tags: [configuration, ssh-keys]
