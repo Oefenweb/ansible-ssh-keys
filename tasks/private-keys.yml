@@ -3,7 +3,7 @@
 - name: add private keys
   copy:
     src: "{{ item.src }}"
-    dest: "{{ item.home }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
+    dest: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0600
@@ -13,7 +13,7 @@
 
 - name: remove private keys
   file:
-    path: "{{ item.home }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
+    path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest }}"
     state: absent
   with_items: ssh_keys_private_keys
   when: item.state is defined and item.state == 'absent'

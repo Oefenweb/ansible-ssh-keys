@@ -2,7 +2,7 @@
 ---
 - name: create ssh directory
   file:
-    path: "{{ item.home }}/{{ ssh_keys_sshdir }}"
+    path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
     state: directory
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
@@ -12,7 +12,7 @@
 
 - name: create ssh directory
   file:
-    path: "{{ item.home }}/{{ ssh_keys_sshdir }}"
+    path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
     state: directory
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
