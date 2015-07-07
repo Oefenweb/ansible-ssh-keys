@@ -46,6 +46,9 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
+  # Generate ssh key
+  - ssh-keygen -t rsa -b 2048 -C '' -P '' -f files/id_rsa -q
+
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi
@@ -66,6 +69,12 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+
+  # Check presence of private key.
+  - sudo diff files/id_rsa ~root/.ssh/id_rsa
+
+  # Check presence of public key.
+  - sudo diff files/id_rsa.pub ~root/.ssh/id_rsa.pub
 
 notifications:
   email: false
