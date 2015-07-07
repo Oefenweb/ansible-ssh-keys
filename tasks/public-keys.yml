@@ -8,7 +8,7 @@
     group: "{{ item.group | default(item.owner) }}"
     mode: 0644
   with_items: ssh_keys_public_keys
-  when: item.1.state == 'present'
+  when: item.state == 'present'
   tags: [configuration, ssh-keys, ssh-keys-public-keys]
 
 - name: remove public keys
