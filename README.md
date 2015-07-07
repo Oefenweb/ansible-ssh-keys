@@ -14,20 +14,20 @@ None
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_private_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
 * `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_private_keys.{n}.dest`: [optional, default: 'id_rsa']: The remote path of the key (relative to `home/.ssh/`)
-* `ssh_keys_private_keys.{n}.state`: [default: 'present']: State
+* `ssh_keys_private_keys.{n}.dest`: [optional, default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_private_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_public_keys`: [default: `[]`]: Public key declarations
 * `ssh_keys_public_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_public_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
 * `ssh_keys_public_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_public_keys.{n}.dest`: [optional, default: 'id_rsa.pub']: The remote path of the key (relative to `home/.ssh/`)
-* `ssh_keys_public_keys.{n}.state`: [default: 'present']: State
+* `ssh_keys_public_keys.{n}.dest`: [optional, default: `id_rsa.pub`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_public_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_authorized_keys`: [default: `[]`]: Authorized key declarations
 * `ssh_keys_authorized_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_authorized_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_authorized_keys.{n}.state`: [default: 'present']: State
+* `ssh_keys_authorized_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_known_hosts`: [default: `[]`]: Known hosts declarations
 * `ssh_keys_known_hosts.{n}.hostname`: [required]: The hostname
