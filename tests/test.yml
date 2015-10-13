@@ -3,7 +3,7 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-ssh-keys
+    - ../../
   vars:
     ssh_keys_private_keys:
       - owner: root
