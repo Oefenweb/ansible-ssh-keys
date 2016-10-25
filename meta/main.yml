@@ -7,16 +7,15 @@ galaxy_info:
   license: MIT
   min_ansible_version: 1.6
   platforms:
-  - name: Ubuntu
-    versions:
-    - lucid
-    - precise
-    - trusty
-  - name: Debian
-    versions:
-    - squeeze
-    - wheezy
-    - jessie
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
   galaxy_tags:
   - system
   - networking

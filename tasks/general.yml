@@ -7,8 +7,10 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
-  with_items: ssh_keys_private_keys
-  tags: [configuration, ssh-keys]
+  with_items: "{{ ssh_keys_private_keys }}"
+  tags:
+    - ssh-keys-general-create-ssh-directories
+    - ssh-keys-general-create-ssh-directories-private-keys
 
 - name: create ssh directory
   file:
@@ -17,5 +19,7 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
-  with_items: ssh_keys_public_keys
-  tags: [configuration, ssh-keys]
+  with_items: "{{ ssh_keys_public_keys }}"
+  tags:
+    - ssh-keys-general-create-ssh-directories
+    - ssh-keys-general-create-ssh-directories-public-keys

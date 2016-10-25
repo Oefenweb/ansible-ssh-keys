@@ -1,7 +1,31 @@
 # tasks file for ssh-keys
 ---
 - include: general.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-general
+
 - include: private-keys.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-private-keys
+
 - include: public-keys.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-public-keys
+
 - include: authorized-keys.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-authorized-keys
+
 - include: known-hosts.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-known-hosts

@@ -7,4 +7,5 @@
     owner: root
     group: root
     mode: 0644
-  tags: [configuration, ssh-keys, ssh-keys-known-hosts]
+  tags:
+    ssh-keys-known-hosts-update

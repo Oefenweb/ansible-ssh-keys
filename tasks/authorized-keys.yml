@@ -5,5 +5,6 @@
     user: "{{ item.owner }}"
     key: "{{ lookup('file', item.src) }}"
     state: "{{ item.state | default('present') }}"
-  with_items: ssh_keys_authorized_keys
-  tags: [configuration, ssh-keys, ssh-keys-authorized-keys]
+  with_items: "{{ ssh_keys_authorized_keys }}"
+  tags:
+    ssh-keys-authorized-keys-setup
