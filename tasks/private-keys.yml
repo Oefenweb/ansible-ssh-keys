@@ -1,6 +1,6 @@
 # tasks file for ssh-keys
 ---
-- name: add private keys
+- name: private-keys | add
   copy:
     src: "{{ item.src }}"
     dest: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest | default(ssh_keys_private_key_filename) }}"
@@ -12,7 +12,7 @@
   tags:
     - ssh-keys-private-keys-add
 
-- name: remove private keys
+- name: private-keys | remove
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest | default(ssh_keys_private_key_filename) }}"
     state: absent

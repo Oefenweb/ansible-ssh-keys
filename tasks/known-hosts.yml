@@ -1,9 +1,32 @@
 # tasks file for ssh-keys
 ---
-- name: update known_hosts file
+- name: known-hosts | stat directories
+  stat:
+    path: "{{ item }}/"
+  register: _stat_directories
+  with_items:
+    - "{{ ssh_keys_known_hosts_path | basename }}"
+  tags:
+    - ssh-keys-known-hosts-directories
+    - ssh-keys-known-hosts-directories-stat
+
+- name: known-hosts | create directories
+  file:
+    path: "{{ item.item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ _stat_directories.results }}"
+  when: item.stat.exists == false
+  tags:
+    - ssh-keys-known-hosts-directories
+    - ssh-keys-known-hosts-directories-create
+
+- name: known-hosts | update file
   template:
-    src: etc/ssh/ssh_known_hosts.j2
-    dest: /etc/ssh/ssh_known_hosts
+    src: "{{ ssh_keys_known_hosts_path.lstrip('/') }}.j2"
+    dest: "{{ ssh_keys_known_hosts_path }}"
     owner: root
     group: root
     mode: 0644

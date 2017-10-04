@@ -34,9 +34,6 @@ branches:
 before_install:
   - sudo apt-get update -qq
 
-  # Generate ssh key
-  - ssh-keygen -t rsa -b 2048 -C '' -P '' -f files/id_rsa -q
-
 install:
   # Install Ansible.
   - if [ "$ANSIBLE_VERSION" = "latest" ]; then pip install ansible; else pip install ansible==$ANSIBLE_VERSION; fi

@@ -1,6 +1,6 @@
 # tasks file for ssh-keys
 ---
-- name: add public keys
+- name: public-keys | add
   copy:
     src: "{{ item.src }}"
     dest: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest | default(ssh_keys_public_key_filename) }}"
@@ -12,7 +12,7 @@
   tags:
     - ssh-keys-public-keys-add
 
-- name: remove public keys
+- name: public-keys | remove
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest | default(ssh_keys_public_key_filename) }}"
     state: absent

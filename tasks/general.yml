@@ -1,6 +1,6 @@
 # tasks file for ssh-keys
 ---
-- name: create ssh directory
+- name: general | create ssh directory
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
     state: directory
@@ -12,7 +12,7 @@
     - ssh-keys-general-create-ssh-directories
     - ssh-keys-general-create-ssh-directories-private-keys
 
-- name: create ssh directory
+- name: general | create ssh directory
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
     state: directory
