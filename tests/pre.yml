@@ -13,3 +13,4 @@
   command: ssh-keygen -t rsa -b 2048 -C '' -P '' -f ../files/id_rsa -q
   args:
     creates: ../files/id_rsa
+  become: false
