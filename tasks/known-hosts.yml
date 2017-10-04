@@ -5,7 +5,7 @@
     path: "{{ item }}/"
   register: _stat_directories
   with_items:
-    - "{{ ssh_keys_known_hosts_path | basename }}"
+    - "{{ ssh_keys_known_hosts_path | dirname }}"
   tags:
     - ssh-keys-known-hosts-directories
     - ssh-keys-known-hosts-directories-stat
