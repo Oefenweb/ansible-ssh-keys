@@ -10,7 +10,7 @@
     - openssh-client
 
 - name: pre | generate key pair
-  command: ssh-keygen -t rsa -b 2048 -C '' -P '' -f ../files/id_rsa -q
+  command: ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ playbook_dir }}/../files/id_rsa -q
   args:
-    creates: ../files/id_rsa
+    creates: "{{ playbook_dir }}/../files/id_rsa"
   become: false
