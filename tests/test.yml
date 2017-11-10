@@ -4,7 +4,7 @@
   connection: local
   become: true
   pre_tasks:
-    - include: pre.yml
+    - include_tasks: pre.yml
   roles:
     - ../../
   vars:
