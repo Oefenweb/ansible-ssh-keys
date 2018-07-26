@@ -1,6 +1,6 @@
 ## ssh-keys
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-ssh-keys.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-ssh-keys) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-ssh--keys-blue.svg)](https://galaxy.ansible.com/list#/roles/4176)
+[![Build Status](https://travis-ci.org/Oefenweb/ansible-ssh-keys.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-ssh-keys) [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-ssh--keys-blue.svg)](https://galaxy.ansible.com/Oefenweb/ssh-keys)
 
 Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems.
 
