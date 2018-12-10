@@ -2,15 +2,15 @@
 ---
 - name: pre | install dependencies
   apt:
-    name: "{{ item }}"
+    name:
+      - openssh-client
     state: "{{ apt_install_state | default('latest') }}"
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
-  with_items:
-    - openssh-client
 
 - name: pre | generate key pair
-  command: ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ playbook_dir }}/../files/id_rsa -q
+  command: >
+    ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ playbook_dir }}/../files/id_rsa -q
   args:
     creates: "{{ playbook_dir }}/../files/id_rsa"
   become: false
