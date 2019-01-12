@@ -1,5 +1,9 @@
 # tasks file for ssh-keys
 ---
+
+- set_fact:
+    ssh_keys_private_keys_internal: "{{ ssh_keys_private_keys }}"
+
 - name: general | create ssh directory
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
@@ -7,7 +11,8 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
-  with_items: "{{ ssh_keys_private_keys }}"
+  with_items: "{{ ssh_keys_private_keys_internal }}"
+  when: not ssh_keys_generate_only
   tags:
     - ssh-keys-general-create-ssh-directories
     - ssh-keys-general-create-ssh-directories-private-keys

@@ -1,0 +1,65 @@
+---
+
+- name: Create local folder to generate keys into
+  file:
+    path: "{{ ssh_keys_generate_dest }}"
+    state: directory
+  delegate_to: localhost
+
+- block:
+    - name: Remove existing private keys
+      file:
+        path: "{{ ssh_keys_generate_dest + '/' + item.src }}"
+        state: absent
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+
+    - name: Remove existing public keys
+      file:
+        path: "{{ ssh_keys_generate_dest + '/' + item.src + '.pub' }}"
+        state: absent
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+  when: ssh_keys_remove_existing
+  delegate_to: localhost
+
+- block:
+    - name: Generate key pairs
+      shell: "{{ ssh_keys_generate_command }} '{{ ssh_keys_generate_dest + '/' + item.src }}'"
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+      when: ssh_keys_remove_existing
+
+    - name: Generate key pairs
+      shell: "{{ ssh_keys_generate_command }} '{{ ssh_keys_generate_dest + '/' + item.src }}'"
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+      when:
+        - (ssh_keys_generate_dest + '/' + item.src) is not file
+        - not ssh_keys_remove_existing
+  delegate_to: localhost
+
+- block:
+    - name: Set owner of private keys to current user
+      file:
+        path: "{{ ssh_keys_generate_dest + '/' + item.src }}"
+        owner: "{{ lookup('env', 'USER') }}"
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+
+    - name: Set owner of public keys to current user
+      file:
+        path: "{{ ssh_keys_generate_dest + '/' + item.src + '.pub' }}"
+        owner: "{{ lookup('env', 'USER') }}"
+      with_items: "{{ ssh_keys_private_keys_internal }}"
+  delegate_to: localhost
+
+- name: Update private key declarations
+  set_fact:
+    ssh_keys_private_keys_internal: >-
+      {{
+        ssh_keys_private_keys_internal
+        | map('combine',
+          {
+            'src': ssh_keys_generate_dest + '/' + item.src
+          }
+        )
+        | list
+      }}
+  with_items: "{{ ssh_keys_private_keys_internal }}"
+

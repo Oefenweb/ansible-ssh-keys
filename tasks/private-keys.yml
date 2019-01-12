@@ -7,7 +7,7 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: "{{ item.mode | default('0600') }}"
-  with_items: "{{ ssh_keys_private_keys }}"
+  with_items: "{{ ssh_keys_private_keys_internal }}"
   when: item.state is undefined or item.state == 'present'
   tags:
     - ssh-keys-private-keys-add
@@ -16,7 +16,7 @@
   file:
     path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}/{{ item.dest | default(ssh_keys_private_key_filename) }}"
     state: absent
-  with_items: "{{ ssh_keys_private_keys }}"
+  with_items: "{{ ssh_keys_private_keys_internal }}"
   when: item.state is defined and item.state == 'absent'
   tags:
     - ssh-keys-private-keys-remove

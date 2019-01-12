@@ -6,11 +6,19 @@
     - ssh-keys
     - ssh-keys-general
 
+- include: generate-keys.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-generate
+  when: ssh_keys_generate
+
 - include: private-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-private-keys
+  when: not ssh_keys_generate_only
 
 - include: public-keys.yml
   tags:

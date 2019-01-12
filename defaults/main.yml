@@ -4,3 +4,8 @@ ssh_keys_private_keys: []
 ssh_keys_public_keys: []
 ssh_keys_authorized_keys: []
 ssh_keys_known_hosts: []
+ssh_keys_generate: false
+ssh_keys_remove_existing: false
+ssh_keys_generate_dest: /tmp
+ssh_keys_generate_only: false
+ssh_keys_generate_command: "ssh-keygen -t rsa -N '' -f"

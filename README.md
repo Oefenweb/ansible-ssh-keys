@@ -14,7 +14,8 @@ None
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_private_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
 * `ssh_keys_private_keys.{n}.mode`: [optional, default `0600`]: The UNIX permission mode bits of the file
-* `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key
+* `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key or the
+    name of the generated key if `ssh_keys_generate` is set to `true`.
 * `ssh_keys_private_keys.{n}.dest`: [optional, default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
 * `ssh_keys_private_keys.{n}.state`: [optional, default: `present`]: State
 
@@ -35,6 +36,17 @@ None
 * `ssh_keys_known_hosts.{n}.hostname`: [required]: The hostname
 * `ssh_keys_known_hosts.{n}.enctype`: [required]: The type of the fingerprint
 * `ssh_keys_known_hosts.{n}.fingerprint`: [required]: The actual fingerprint
+
+* `ssh_keys_generate`: [default: `false`]: Set to `true` to create the keys
+  locally. The role will generate rsa type keys using ssh-keygen. To override the
+    command used, use the internal `ssh_keys_generate_command` variable.
+* `ssh_keys_generate_dest`: [default: `/tmp`]: The local folder to generate the keys into
+* `ssh_keys_remove_existing`: [default: `false`]: Set to true to update already generated keys locally
+* `ssh_keys_generate_only`: [default: `false`]: Set to true to only generate
+  the keys and not upload them anywhere. This applies to the private keys only.
+  For instance, you can set this to `true` to generate a new key pair and then
+  upload the public key to a remote user's authorized_keys file to grant them
+  access to the server. In this case, only `ssh_keys_private_keys.{n}.src` needs to be set.
 
 ## Dependencies
 
