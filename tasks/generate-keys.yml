@@ -3,6 +3,7 @@
 - name: Create local folder to generate keys into
   file:
     path: "{{ ssh_keys_generate_dest }}"
+    owner: "{{ lookup('env', 'USER') }}"
     state: directory
   delegate_to: localhost
 
