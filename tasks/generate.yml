@@ -1,6 +1,14 @@
 ---
 
 - block:
+    - name: Create ssh key generation directory
+      file:
+        path: "{{ item.path | dirname }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
+        state: directory
+      with_items: "{{ ssh_keys_generate_keys }}"
+
     - name: Generate private ssh key
       shell:
         "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
