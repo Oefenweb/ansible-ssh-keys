@@ -2,16 +2,19 @@
 
 - block:
     - name: Generate private ssh key
-      openssl_privatekey:
+      shell:
+        "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
+      when: >-
+        item.force | bool or
+        item.path is not file
+      with_items: "{{ ssh_keys_generate_keys }}"
+
+    - name: Set permissions on keys
+      file:
         path: "{{ item.path }}"
-        cipher: "{{ item.cipher | default(omit) }}"
-        force: "{{ item.force | default(false) }}"
         owner: "{{ item.owner }}"
         group: "{{ item.group | default(item.owner) }}"
-        mode: "{{ item.mode | default(0600) }}"
-        passphrase: "{{ item.passphrase | default(omit) }}"
-        size: "{{ item.size | default(omit) }}"
-        type: "{{ item.type | default(omit) }}"
+        mode: "{{ item.mode | default('0600') }}"
       with_items: "{{ ssh_keys_generate_keys }}"
 
     - name: Generate public ssh key

@@ -4,4 +4,11 @@ ssh_keys_sshdir: '.ssh'
 ssh_keys_private_key_filename: 'id_rsa'
 ssh_keys_public_key_filename: 'id_rsa.pub'
 ssh_keys_known_hosts_path: /etc/ssh/ssh_known_hosts
-ssh_keys_generate_command: "ssh-keygen -t rsa -N '' -f"
+_ssh_keys_generate_command: >-
+  openssl \
+    gen{{ item.type | default('rsa') }} \
+    -out {{ item.path }} \
+    {{ '-' + item.cipher if 'cipher' in item else '' }} \
+    -passout stdin \
+    {{ item.size | default(2048) }} \
+    {{ '<<< "' + item.passphrase + '"' if 'passphrase' in item else '' }}
