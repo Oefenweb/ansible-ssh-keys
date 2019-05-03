@@ -5,7 +5,7 @@
       shell:
         "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
       when: >-
-        item.force | bool or
+        item.force | default(false) | bool or
         item.path is not file
       with_items: "{{ ssh_keys_generate_keys }}"
 
