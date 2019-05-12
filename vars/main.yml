@@ -9,6 +9,6 @@ _ssh_keys_generate_command: >-
     gen{{ item.type | default('rsa') }} \
     -out {{ item.path }} \
     {{ '-' + item.cipher if 'cipher' in item else '' }} \
-    -passout stdin \
+    {{ '-passout stdin' if 'passphrase' in item else '' }} \
     {{ item.size | default(2048) }} \
     {{ '<<< "' + item.passphrase + '"' if 'passphrase' in item else '' }}
