@@ -16,9 +16,9 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: 0o755
   with_items: "{{ _stat_directories.results }}"
-  when: item.stat.exists == false
+  when: not item.stat.exists | bool
   tags:
     - ssh-keys-known-hosts-directories
     - ssh-keys-known-hosts-directories-create
@@ -29,6 +29,6 @@
     dest: "{{ ssh_keys_known_hosts_path }}"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o644
   tags:
     ssh-keys-known-hosts-update

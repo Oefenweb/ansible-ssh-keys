@@ -12,6 +12,8 @@
     - name: Generate private ssh key
       shell:
         "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
+      tags:
+        - skip_ansible_lint
       when: >-
         item.force | default(false) | bool or
         item.path is not file
