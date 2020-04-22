@@ -22,7 +22,7 @@ EOF
 exit 1;
 fi
 
-ipAddress="$(nslookup ${hostName} | awk '/^Address: / { print $2 }')";
+ipAddress="$(nslookup ${hostName} | awk '/^Address: / { print $2 }' || ping -c 1 ${hostName} | head -n 1 | awk -F'[()]' '{print $2}')";
 ssh-keyscan "${hostName}" 2> /dev/null | while read -r line; do
   if [ "${noIp}" = '--no-ip' ]; then
     echo "  - hostname: '${hostName}'";
