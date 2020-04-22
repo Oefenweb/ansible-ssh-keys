@@ -10,5 +10,5 @@ _ssh_keys_generate_command: >-
     -out {{ item.path }} \
     {{ '-' + item.cipher if 'cipher' in item else '' }} \
     {{ '-passout stdin' if 'passphrase' in item else '' }} \
-    {{ item.size | default(2048) }} \
-    {{ '<<< "' + item.passphrase + '"' if 'passphrase' in item else '' }}
+    {{ item.size | default(4096) }} \
+    {{ ('passphrase' in item) | ternary('<<< "' + item.passphrase + '"', '') }}

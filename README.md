@@ -13,12 +13,9 @@ None
 
 * `ssh_keys_generate_keys`: [default: `[]`]: Keys to generate locally
 * `ssh_keys_generate_keys.{n}.path`: [required] The local path where the key should be generated
-* `ssh_keys_generate_keys.{n}.cipher`: [optional, default: None]: The cipher to
-  encrypt the private key
-* `ssh_keys_generate_keys.{n}.format`: [optional, default: `PEM`]: The format of
-  the public key
-* `ssh_keys_generate_keys.{n}.force`: [optional, default: no]: Whether to
-  regenerate the key pair if it already exists
+* `ssh_keys_generate_keys.{n}.cipher`: [optional, default: None]: The cipher to encrypt the private key
+* `ssh_keys_generate_keys.{n}.format`: [optional, default: `OpenSSH`]: The format of the public key
+* `ssh_keys_generate_keys.{n}.force`: [optional, default: false]: Whether to regenerate the key pair if it already exists
 * `ssh_keys_generate_keys.{n}.owner`: [required]: The name of the user that should own the key pair
 * `ssh_keys_generate_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the key pair
 * `ssh_keys_generate_keys.{n}.mode`: [optional, default `0600`]: The UNIX permission mode bits of the key pair
@@ -28,8 +25,7 @@ None
 
 * `ssh_keys_private_keys`: [default: `[]`]: Private key declarations
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
-* `ssh_keys_private_keys.{n}.group`: [optional, default `owner`]: The name of
-  the group that should own the file
+* `ssh_keys_private_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
 * `ssh_keys_private_keys.{n}.mode`: [optional, default `0600`]: The UNIX permission mode bits of the file
 * `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key
 * `ssh_keys_private_keys.{n}.dest`: [optional, default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
