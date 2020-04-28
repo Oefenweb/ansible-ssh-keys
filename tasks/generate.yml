@@ -1,0 +1,47 @@
+# tasks file for ssh-keys
+---
+- block:
+    - name: generate | create ssh key generation directory
+      file:
+        path: "{{ item.path | dirname }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
+        state: directory
+      with_items: "{{ ssh_keys_generate_keys }}"
+      tags:
+        - ssh-keys-generate-directories
+
+    - name: generate | generate private ssh key
+      shell: "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
+      tags:
+        - ssh-keys-generate-private-keys
+        - skip_ansible_lint
+      when: >-
+        item.force | default(false) | bool or
+        item.path is not file
+      with_items: "{{ ssh_keys_generate_keys }}"
+
+    - name: generate | set permissions on keys
+      file:
+        path: "{{ item.path }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
+        mode: "{{ item.mode | default('0600') }}"
+      with_items: "{{ ssh_keys_generate_keys }}"
+      tags:
+        - ssh-keys-generate-permissions
+
+    - name: generate | generate public ssh key
+      openssl_publickey:
+        path: "{{ item.path }}.pub"
+        force: "{{ item.force | default(false) }}"
+        format: "{{ item.format | default('OpenSSH') }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group | default(item.owner) }}"
+        mode: "{{ item.mode | default('0600') }}"
+        privatekey_passphrase: "{{ item.passphrase | default(omit) }}"
+        privatekey_path: "{{ item.path }}"
+      with_items: "{{ ssh_keys_generate_keys }}"
+      tags:
+        - ssh-keys-generate-public-keys
+  connection: local
