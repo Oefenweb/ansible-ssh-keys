@@ -1,5 +1,12 @@
 # tasks file for ssh-keys
 ---
+
+- include: generate.yml
+  tags:
+    - configuration
+    - ssh-keys
+    - ssh-keys-generate
+
 - include: general.yml
   tags:
     - configuration
