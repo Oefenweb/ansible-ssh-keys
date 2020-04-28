@@ -12,11 +12,10 @@
         - ssh-keys-generate-directories
 
     - name: generate | generate private ssh key
-      shell:
-        "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
+      shell: "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
       tags:
-        - skip_ansible_lint
         - ssh-keys-generate-private-keys
+        - skip_ansible_lint
       when: >-
         item.force | default(false) | bool or
         item.path is not file
@@ -30,7 +29,6 @@
         mode: "{{ item.mode | default('0600') }}"
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
-        - skip_ansible_lint
         - ssh-keys-generate-permissions
 
     - name: generate | generate public ssh key
