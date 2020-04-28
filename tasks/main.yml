@@ -1,37 +1,37 @@
 # tasks file for ssh-keys
 ---
 
-- include: generate.yml
+- import_tasks: generate.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-generate
 
-- include: general.yml
+- import_tasks: general.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-general
 
-- include: private-keys.yml
+- import_tasks: private-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-private-keys
 
-- include: public-keys.yml
+- import_tasks: public-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-public-keys
 
-- include: authorized-keys.yml
+- import_tasks: authorized-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-authorized-keys
 
-- include: known-hosts.yml
+- import_tasks: known-hosts.yml
   tags:
     - configuration
     - ssh-keys
