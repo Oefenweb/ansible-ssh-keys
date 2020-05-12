@@ -8,7 +8,7 @@ _ssh_keys_generate_command: >-
   openssl \
     gen{{ item.type | default('rsa') }} \
     -out {{ item.path }} \
-    {{ ('cipher' in item) | ternary('-' + item.cipher, '') }} \
-    {{ ('passphrase' in item) | ternary('-passout stdin', '') }} \
+    {{ item.cipher if item.cipher is defined else '' }} \
+    {{ '-passout stdin' if item.passphrase is defined else '' }} \
     {{ item.size | default(4096) }} \
-    {{ ('passphrase' in item) | ternary('<<< "' + item.passphrase + '"', '') }}
+    {{  '<<< "' + item.passphrase + '"' if item.passphrase is defined else '' }}
