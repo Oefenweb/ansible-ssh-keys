@@ -53,6 +53,8 @@ None
 * `ssh_keys_known_hosts.{n}.enctype`: [required]: The type of the fingerprint
 * `ssh_keys_known_hosts.{n}.fingerprint`: [required]: The actual fingerprint
 
+* `ssh_keys_generate_keys_local_become`: [optional, default: false]: Whether to use sudo when generating ssh keys locally
+
 ## Dependencies
 
 None
