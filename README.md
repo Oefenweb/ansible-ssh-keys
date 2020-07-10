@@ -46,7 +46,8 @@ None
 * `ssh_keys_authorized_keys`: [default: `[]`]: Authorized key declarations
 * `ssh_keys_authorized_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_authorized_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_authorized_keys.{n}.state`: [default: `present`]: State
+* `ssh_keys_authorized_keys.{n}.state`: [optional, default: `present`]: State
+* `ssh_keys_authorized_keys.{n}.path`: [optional, default: `authorized_keys`]: Authorized keys file (relative to `home/.ssh/`)
 
 * `ssh_keys_known_hosts`: [default: `[]`]: Known hosts declarations
 * `ssh_keys_known_hosts.{n}.hostname`: [required]: The hostname
