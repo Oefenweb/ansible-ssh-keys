@@ -13,36 +13,40 @@ None
 
 * `ssh_keys_generate_keys`: [default: `[]`]: Keys to generate locally
 * `ssh_keys_generate_keys.{n}.path`: [required] The local path where the key should be generated
-* `ssh_keys_generate_keys.{n}.cipher`: [optional, default: None]: The cipher to encrypt the private key
-* `ssh_keys_generate_keys.{n}.format`: [optional, default: `OpenSSH`]: The format of the public key
-* `ssh_keys_generate_keys.{n}.force`: [optional, default: false]: Whether to regenerate the key pair if it already exists
+* `ssh_keys_generate_keys.{n}.cipher`: [default: `None`]: The cipher to encrypt the private key
+* `ssh_keys_generate_keys.{n}.format`: [default: `OpenSSH`]: The format of the public key
+* `ssh_keys_generate_keys.{n}.force`: [default: `false`]: Whether to regenerate the key pair if it already exists
 * `ssh_keys_generate_keys.{n}.owner`: [required]: The name of the user that should own the key pair
-* `ssh_keys_generate_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the key pair
-* `ssh_keys_generate_keys.{n}.mode`: [optional, default `0600`]: The UNIX permission mode bits of the key pair
-* `ssh_keys_generate_keys.{n}.passphrase`: [optional, default `''`]: The passphrase for the private key
-* `ssh_keys_generate_keys.{n}.size`: [optional, default `4096`]: Size in bits of the TLS/SSL key to generate
-* `ssh_keys_generate_keys.{n}.type`: [optional, default `RSA`]: The algorithm used to generate the private key
+* `ssh_keys_generate_keys.{n}.group`: [default: `owner`]: The name of the group that should own the key pair
+* `ssh_keys_generate_keys.{n}.mode`: [default: `0600`]: The UNIX permission mode bits of the key pair
+* `ssh_keys_generate_keys.{n}.passphrase`: [default: `''`]: The passphrase for the private key
+* `ssh_keys_generate_keys.{n}.size`: [default: `4096`]: Size in bits of the TLS/SSL key to generate
+* `ssh_keys_generate_keys.{n}.type`: [default: `RSA`]: The algorithm used to generate the private key
 
 * `ssh_keys_private_keys`: [default: `[]`]: Private key declarations
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
-* `ssh_keys_private_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
-* `ssh_keys_private_keys.{n}.mode`: [optional, default `0600`]: The UNIX permission mode bits of the file
+* `ssh_keys_private_keys.{n}.group`: [default: `owner`]: The name of the group that should own the file
+* `ssh_keys_private_keys.{n}.mode`: [default: `0600`]: The UNIX permission mode bits of the file
 * `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_private_keys.{n}.dest`: [optional, default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
-* `ssh_keys_private_keys.{n}.state`: [optional, default: `present`]: State
+* `ssh_keys_private_keys.{n}.dest`: [default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_private_keys.{n}.dest_absolute`: [optional]: The remote path of the key
+* `ssh_keys_private_keys.{n}.dest_managed`: [default: `true`]: Whether or not the remote path of the key should be created
+* `ssh_keys_private_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_public_keys`: [default: `[]`]: Public key declarations
 * `ssh_keys_public_keys.{n}.owner`: [required]: The name of the user that should own the file
-* `ssh_keys_public_keys.{n}.group`: [optional, default `owner`]: The name of the group that should own the file
-* `ssh_keys_public_keys.{n}.mode`: [optional, default `0644`]: The UNIX permission mode bits of the file
+* `ssh_keys_public_keys.{n}.group`: [default: `owner`]: The name of the group that should own the file
+* `ssh_keys_public_keys.{n}.mode`: [default: `0644`]: The UNIX permission mode bits of the file
 * `ssh_keys_public_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_public_keys.{n}.dest`: [optional, default: `id_rsa.pub`]: The remote path of the key (relative to `home/.ssh/`)
-* `ssh_keys_public_keys.{n}.state`: [optional, default: `present`]: State
+* `ssh_keys_public_keys.{n}.dest`: [default: `id_rsa.pub`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_public_keys.{n}.dest_absolute`: [optional]: The remote path of the key
+* `ssh_keys_public_keys.{n}.dest_managed`: [default: `true`]: Whether or not the remote path of the key should be created
+* `ssh_keys_public_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_authorized_keys`: [default: `[]`]: Authorized key declarations
 * `ssh_keys_authorized_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_authorized_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_authorized_keys.{n}.state`: [optional, default: `present`]: State
+* `ssh_keys_authorized_keys.{n}.state`: [default: `present`]: State
 
 * `ssh_keys_known_hosts`: [default: `[]`]: Known hosts declarations
 * `ssh_keys_known_hosts.{n}.hostname`: [required]: The hostname

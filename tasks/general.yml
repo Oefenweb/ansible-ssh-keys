@@ -2,12 +2,13 @@
 ---
 - name: general | create ssh directory
   file:
-    path: "~{{ item.owner }}/{{ ssh_keys_sshdir }}"
+    path: "{{ (item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(ssh_keys_private_key_filename)))) | dirname }}"
     state: directory
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
   with_items: "{{ ssh_keys_private_keys }}"
+  when: item.dest_managed | default(true)
   tags:
     - ssh-keys-general-create-ssh-directories
     - ssh-keys-general-create-ssh-directories-private-keys
@@ -20,6 +21,7 @@
     group: "{{ item.group | default(item.owner) }}"
     mode: 0700
   with_items: "{{ ssh_keys_public_keys }}"
+  when: item.dest_managed | default(true)
   tags:
     - ssh-keys-general-create-ssh-directories
     - ssh-keys-general-create-ssh-directories-public-keys
