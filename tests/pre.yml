@@ -1,4 +1,4 @@
-# pre test file for ssh-keys
+# pre test file
 ---
 - name: pre | install dependencies
   apt:

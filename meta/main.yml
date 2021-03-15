@@ -1,6 +1,7 @@
-# meta file for ssh-keys
+# meta file
 ---
 galaxy_info:
+  namespace: oefenweb
   role_name: ssh-keys
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.

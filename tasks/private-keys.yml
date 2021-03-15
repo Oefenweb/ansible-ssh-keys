@@ -1,4 +1,4 @@
-# tasks file for ssh-keys
+# tasks file
 ---
 - name: private-keys | add
   copy:

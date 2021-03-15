@@ -1,4 +1,4 @@
-# tasks file for ssh-keys
+# tasks file
 ---
 - name: authorized-keys | set up for users
   authorized_key:

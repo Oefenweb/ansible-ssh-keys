@@ -1,4 +1,4 @@
-# tasks file for ssh-keys
+# tasks file
 ---
 - block:
     - name: generate | create ssh key generation directory

@@ -1,4 +1,4 @@
-# defaults file for ssh-keys
+# defaults file
 ---
 ssh_keys_generate_keys: []
 ssh_keys_private_keys: []

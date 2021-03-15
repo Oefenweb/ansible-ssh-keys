@@ -1,4 +1,4 @@
-# tasks file for ssh-keys
+# tasks file
 ---
 - name: general | create ssh directory
   file:
