@@ -2,7 +2,7 @@
 ---
 - name: test presence of private key
   shell: >
-    diff files/id_rsa ~dummy/.ssh/id_rsa
+    diff {{ playbook_dir }}/../files/id_rsa ~dummy/.ssh/id_rsa
     && (echo 'Private key test: pass' && exit 0)
     || (echo 'Private key test: fail' && exit 1)
   args:
@@ -13,7 +13,7 @@
 
 - name: test presence of public key
   shell: >
-    diff files/id_rsa.pub ~dummy/.ssh/id_rsa.pub
+    diff {{ playbook_dir }}/../files/id_rsa.pub ~dummy/.ssh/id_rsa.pub
     && (echo 'Public key test: pass' && exit 0)
     || (echo 'Public key test: fail' && exit 1)
   args:

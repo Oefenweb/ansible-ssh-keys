@@ -10,3 +10,6 @@
       include: "{{ playbook_dir }}/tasks/pre.yml"
   roles:
     - ../../
+  post_tasks:
+    - name: include tasks
+      include: "{{ playbook_dir }}/tasks/post.yml"

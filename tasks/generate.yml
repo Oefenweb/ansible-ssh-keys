@@ -6,6 +6,7 @@
         path: "{{ item.path | dirname }}"
         owner: "{{ item.owner }}"
         group: "{{ item.group | default(item.owner) }}"
+        mode: 0700
         state: directory
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:

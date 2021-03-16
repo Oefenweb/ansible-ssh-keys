@@ -2,7 +2,7 @@
 ---
 galaxy_info:
   namespace: oefenweb
-  role_name: ssh-keys
+  role_name: ssh_keys
   author: Mischa ter Smitten
   company: Oefenweb.nl B.V.
   description: Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems

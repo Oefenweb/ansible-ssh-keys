@@ -2,7 +2,6 @@
 - name: Converge
   hosts: all
   become: true
-  tasks: []
   pre_tasks:
     - name: include vars
       include_vars: "{{ playbook_dir }}/../../tests/vars/main.yml"
