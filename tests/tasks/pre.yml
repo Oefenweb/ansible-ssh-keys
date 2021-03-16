@@ -1,6 +1,6 @@
 # pre test file
 ---
-- name: pre | install dependencies
+- name: install dependencies
   apt:
     name:
       - openssh-client
@@ -8,9 +8,13 @@
     update_cache: true
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 
-- name: pre | generate key pair
+- name: generate key pair
   command: >
     ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ playbook_dir }}/../files/id_rsa -q
   args:
     creates: "{{ playbook_dir }}/../files/id_rsa"
   become: false
+
+- name: create user (if needed)
+  user:
+    name: dummy

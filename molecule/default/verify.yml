@@ -1,0 +1,9 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  tasks:
+    - name: include vars
+      include_vars: "{{ playbook_dir }}/../../tests/vars/main.yml"
+    - name: include tasks
+      include: "{{ playbook_dir }}/../../tests/tasks/post.yml"
