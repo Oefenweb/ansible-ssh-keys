@@ -2,13 +2,13 @@
 ---
 ssh_keys_private_keys:
   - owner: dummy
-    src: id_rsa
+    src: "{{ playbook_dir }}/../files/id_rsa"
 ssh_keys_public_keys:
   - owner: dummy
-    src: id_rsa.pub
+    src: "{{ playbook_dir }}/../files/id_rsa.pub"
 ssh_keys_authorized_keys:
   - owner: dummy
-    src: id_rsa.pub
+    src: "{{ playbook_dir }}/../files/id_rsa.pub"
 ssh_keys_known_hosts:
   - hostname: github.com
     enctype: ssh-rsa

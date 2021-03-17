@@ -10,9 +10,9 @@
 
 - name: generate key pair
   command: >
-    ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ playbook_dir }}/../files/id_rsa -q
+    ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ ssh_keys_private_keys[0]['src'] }} -q
   args:
-    creates: "{{ playbook_dir }}/../files/id_rsa"
+    creates: "{{ ssh_keys_private_keys[0]['src'] }}"
   become: false
 
 - name: create user (if needed)
