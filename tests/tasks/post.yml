@@ -1,0 +1,34 @@
+# post test file
+---
+- name: test presence of private key
+  shell: >
+    diff {{ ssh_keys_private_keys[0]['src'] }} ~dummy/.ssh/{{ ssh_keys_private_keys[0]['src'] | basename }}
+    && (echo 'Private key test: pass' && exit 0)
+    || (echo 'Private key test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
+
+- name: test presence of public key
+  shell: >
+    diff {{ ssh_keys_public_keys[0]['src'] }} ~dummy/.ssh/{{ ssh_keys_public_keys[0]['src'] | basename }}
+    && (echo 'Public key test: pass' && exit 0)
+    || (echo 'Public key test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
+
+- name: test presence of known hosts
+  shell: >
+    grep -q 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa' /etc/ssh/ssh_known_hosts
+    && (echo 'Known hosts test: pass' && exit 0)
+    || (echo 'Known hosts test: fail' && exit 1)
+  args:
+    warn: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
