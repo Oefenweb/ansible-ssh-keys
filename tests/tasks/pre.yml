@@ -10,9 +10,10 @@
 
 - name: generate key pair
   command: >
-    ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ ssh_keys_private_keys[0]['src'] }} -q
+    ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ ssh_keys_private_key }} -q
   args:
-    creates: "{{ ssh_keys_private_keys[0]['src'] }}"
+    creates: "{{ ssh_keys_private_key }}"
+  connection: local
   become: false
 
 - name: create user (if needed)
