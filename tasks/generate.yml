@@ -45,4 +45,5 @@
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
         - ssh-keys-generate-public-keys
-  connection: local
+  delegate_to: localhost
+  become: "{{ ssh_keys_generate_keys_local_become }}"
