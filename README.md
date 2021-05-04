@@ -23,6 +23,9 @@ None
 * `ssh_keys_generate_keys.{n}.size`: [default: `4096`]: Size in bits of the TLS/SSL key to generate
 * `ssh_keys_generate_keys.{n}.type`: [default: `RSA`]: The algorithm used to generate the private key
 
+* `ssh_keys_generate_keys_command`: [optional, default: `_ssh_keys_generate_keys_command`]:
+* `ssh_keys_generate_keys_become`: [optional, default: `false`]: Whether or not to use `sudo` when generating ssh keys (locally)
+
 * `ssh_keys_private_keys`: [default: `[]`]: Private key declarations
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
 * `ssh_keys_private_keys.{n}.group`: [default: `owner`]: The name of the group that should own the file
@@ -53,8 +56,6 @@ None
 * `ssh_keys_known_hosts.{n}.hostname`: [required]: The hostname
 * `ssh_keys_known_hosts.{n}.enctype`: [required]: The type of the fingerprint
 * `ssh_keys_known_hosts.{n}.fingerprint`: [required]: The actual fingerprint
-
-* `ssh_keys_generate_keys_local_become`: [optional, default: false]: Whether to use sudo when generating ssh keys locally
 
 ## Dependencies
 
