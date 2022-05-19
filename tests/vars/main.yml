@@ -1,13 +1,14 @@
 # vars file
 ---
+ssh_keys_owner: dummy
 ssh_keys_private_keys:
-  - owner: dummy
+  - owner: "{{ ssh_keys_owner }}"
     src: "{{ ssh_keys_private_key }}"
 ssh_keys_public_keys:
-  - owner: dummy
+  - owner: "{{ ssh_keys_owner }}"
     src: "{{ ssh_keys_private_key }}.pub"
 ssh_keys_authorized_keys:
-  - owner: dummy
+  - owner: "{{ ssh_keys_owner }}"
     src: "{{ ssh_keys_private_key }}.pub"
 ssh_keys_known_hosts:
   - hostname: github.com
