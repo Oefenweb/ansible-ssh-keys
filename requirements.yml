@@ -1,0 +1,5 @@
+# requirements file
+---
+collections:
+  - name: ansible.posix
+  - name: community.crypto
