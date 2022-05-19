@@ -1,6 +1,7 @@
 # tasks file
 ---
-- block:
+- name: generate
+  block:
 
     - name: generate | create ssh key generation directory
       ansible.builtin.file:
@@ -16,13 +17,13 @@
     - name: generate | generate private ssh key
       ansible.builtin.shell: >
         {{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}
-      tags:
-        - ssh-keys-generate-private-keys
-        - skip_ansible_lint
+      with_items: "{{ ssh_keys_generate_keys }}"
       when: >-
         item.force | default(false) | bool or
         item.path is not file
-      with_items: "{{ ssh_keys_generate_keys }}"
+      tags:
+        - ssh-keys-generate-private-keys
+        - skip_ansible_lint
 
     - name: generate | set permissions on keys
       ansible.builtin.file:

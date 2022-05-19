@@ -28,3 +28,5 @@ ansible.cfg
 # Other files #
 ###############
 !empty
+
+files/id_rsa*
