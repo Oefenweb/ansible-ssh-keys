@@ -1,7 +1,7 @@
 # pre test file
 ---
 - name: install dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - openssh-client
     state: "{{ apt_install_state | default('latest') }}"
@@ -9,7 +9,7 @@
     cache_valid_time: "{{ apt_update_cache_valid_time | default(3600) }}"
 
 - name: generate key pair
-  command: >
+  ansible.builtin.command: >
     ssh-keygen -t rsa -b 2048 -C '' -P '' -f {{ ssh_keys_private_key }} -q
   args:
     creates: "{{ ssh_keys_private_key }}"
@@ -17,5 +17,5 @@
   become: false
 
 - name: create user (if needed)
-  user:
-    name: dummy
+  ansible.builtin.user:
+    name: "{{ ssh_keys_owner }}"
