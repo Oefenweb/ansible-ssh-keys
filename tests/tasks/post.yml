@@ -8,37 +8,31 @@
 
 - block:
 
-  - name: test presence of private key
+  - name: test presence of private key  # noqa command-instead-of-module
     ansible.builtin.shell: >
       diff {{ ssh_keys_private_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_private_keys[0]['src'] | basename }}
       && (echo 'Private key test: pass' && exit 0)
       || (echo 'Private key test: fail' && exit 1)
-    args:
-      warn: false
     changed_when: false
     tags:
       - skip_ansible_lint
 
-  - name: test presence of public key
+  - name: test presence of public key  # noqa command-instead-of-module
     ansible.builtin.shell: >
       diff {{ ssh_keys_public_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_public_keys[0]['src'] | basename }}
       && (echo 'Public key test: pass' && exit 0)
       || (echo 'Public key test: fail' && exit 1)
-    args:
-      warn: false
     changed_when: false
 
   when: _ansible_connection.stdout != 'ssh'
   tags:
     - skip_ansible_lint
 
-- name: test presence of known hosts
+- name: test presence of known hosts  # noqa command-instead-of-module
   ansible.builtin.shell: >
     grep -q 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa' /etc/ssh/ssh_known_hosts
     && (echo 'Known hosts test: pass' && exit 0)
     || (echo 'Known hosts test: fail' && exit 1)
-  args:
-    warn: false
   changed_when: false
   tags:
     - skip_ansible_lint
