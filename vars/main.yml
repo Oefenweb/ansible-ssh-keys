@@ -1,8 +1,6 @@
 # vars file
 ---
 ssh_keys_sshdir: '.ssh'
-ssh_keys_private_key_filename: 'id_rsa'
-ssh_keys_public_key_filename: 'id_rsa.pub'
 ssh_keys_known_hosts_path: /etc/ssh/ssh_known_hosts
 _ssh_keys_generate_keys_command: >-
   openssl \

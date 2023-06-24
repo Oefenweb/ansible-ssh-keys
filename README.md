@@ -31,7 +31,7 @@ None
 * `ssh_keys_private_keys.{n}.group`: [default: `owner`]: The name of the group that should own the file
 * `ssh_keys_private_keys.{n}.mode`: [default: `0600`]: The UNIX permission mode bits of the file
 * `ssh_keys_private_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_private_keys.{n}.dest`: [default: `id_rsa`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_private_keys.{n}.dest`: [default: `src | basename`]: The remote path of the key (relative to `home/.ssh/`)
 * `ssh_keys_private_keys.{n}.dest_absolute`: [optional]: The remote path of the key
 * `ssh_keys_private_keys.{n}.dest_managed`: [default: `true`]: Whether or not the remote path of the key should be created
 * `ssh_keys_private_keys.{n}.state`: [default: `present`]: State
@@ -41,7 +41,7 @@ None
 * `ssh_keys_public_keys.{n}.group`: [default: `owner`]: The name of the group that should own the file
 * `ssh_keys_public_keys.{n}.mode`: [default: `0644`]: The UNIX permission mode bits of the file
 * `ssh_keys_public_keys.{n}.src`: [required]: The local path of the key
-* `ssh_keys_public_keys.{n}.dest`: [default: `id_rsa.pub`]: The remote path of the key (relative to `home/.ssh/`)
+* `ssh_keys_public_keys.{n}.dest`: [default: `src | basename`]: The remote path of the key (relative to `home/.ssh/`)
 * `ssh_keys_public_keys.{n}.dest_absolute`: [optional]: The remote path of the key
 * `ssh_keys_public_keys.{n}.dest_managed`: [default: `true`]: Whether or not the remote path of the key should be created
 * `ssh_keys_public_keys.{n}.state`: [default: `present`]: State
@@ -74,13 +74,13 @@ None
         comment: RSA key
     ssh_keys_private_keys:
       - owner: root
-        src: ../../../files/ssh-keys/id_rsa
+        src: "{{ playbook_dir }}/files/ssh-keys/id_rsa"
     ssh_keys_public_keys:
       - owner: root
-        src: ../../../files/ssh-keys/id_rsa.pub
+        src: "{{ playbook_dir }}/files/ssh-keys/id_rsa.pub"
     ssh_keys_authorized_keys:
       - owner: root
-        src: ../../../files/ssh-keys/id_rsa.pub
+        src: "{{ playbook_dir }}/files/ssh-keys/id_rsa.pub"
     ssh_keys_known_hosts:
       - hostname: github.com
         enctype: ssh-rsa

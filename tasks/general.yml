@@ -2,7 +2,7 @@
 ---
 - name: general | create ssh directory
   ansible.builtin.file:
-    path: "{{ (item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(ssh_keys_private_key_filename)))) | dirname }}"
+    path: "{{ (item.dest_absolute | default('~' + item.owner + '/' + ssh_keys_sshdir + '/' + (item.dest | default(item.src | basename)))) | dirname }}"
     state: directory
     owner: "{{ item.owner }}"
     group: "{{ item.group | default(item.owner) }}"
