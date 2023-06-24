@@ -1,36 +1,42 @@
 # tasks file
 ---
-- ansible.builtin.import_tasks: generate.yml
+- name: generate
+  ansible.builtin.import_tasks: generate.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-generate
 
-- ansible.builtin.import_tasks: general.yml
+- name: general
+  ansible.builtin.import_tasks: general.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-general
 
-- ansible.builtin.import_tasks: private-keys.yml
+- name: private-keys
+  ansible.builtin.import_tasks: private-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-private-keys
 
-- ansible.builtin.import_tasks: public-keys.yml
+- name: public-keys
+  ansible.builtin.import_tasks: public-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-public-keys
 
-- ansible.builtin.import_tasks: authorized-keys.yml
+- name: authorized-keys
+  ansible.builtin.import_tasks: authorized-keys.yml
   tags:
     - configuration
     - ssh-keys
     - ssh-keys-authorized-keys
 
-- ansible.builtin.import_tasks: known-hosts.yml
+- name: known-hosts
+  ansible.builtin.import_tasks: known-hosts.yml
   tags:
     - configuration
     - ssh-keys

@@ -1,8 +1,9 @@
 # tasks file
 ---
 - name: generate
+  delegate_to: localhost
+  become: "{{ ssh_keys_generate_keys_become }}"
   block:
-
     - name: generate | create ssh key generation directory
       ansible.builtin.file:
         path: "{{ item.path | dirname }}"
@@ -48,6 +49,3 @@
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
         - ssh-keys-generate-public-keys
-
-  delegate_to: localhost
-  become: "{{ ssh_keys_generate_keys_become }}"

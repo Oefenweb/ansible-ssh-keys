@@ -6,27 +6,26 @@
   register: _ansible_connection
   changed_when: false
 
-- block:
-
-  - name: test presence of private key  # noqa command-instead-of-module
-    ansible.builtin.shell: >
-      diff {{ ssh_keys_private_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_private_keys[0]['src'] | basename }}
-      && (echo 'Private key test: pass' && exit 0)
-      || (echo 'Private key test: fail' && exit 1)
-    changed_when: false
-    tags:
-      - skip_ansible_lint
-
-  - name: test presence of public key  # noqa command-instead-of-module
-    ansible.builtin.shell: >
-      diff {{ ssh_keys_public_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_public_keys[0]['src'] | basename }}
-      && (echo 'Public key test: pass' && exit 0)
-      || (echo 'Public key test: fail' && exit 1)
-    changed_when: false
-
+- name: test presence of
   when: _ansible_connection.stdout != 'ssh'
   tags:
     - skip_ansible_lint
+  block:
+    - name: test presence of private key  # noqa command-instead-of-module
+      ansible.builtin.shell: >
+        diff {{ ssh_keys_private_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_private_keys[0]['src'] | basename }}
+        && (echo 'Private key test: pass' && exit 0)
+        || (echo 'Private key test: fail' && exit 1)
+      changed_when: false
+      tags:
+        - skip_ansible_lint
+
+    - name: test presence of public key  # noqa command-instead-of-module
+      ansible.builtin.shell: >
+        diff {{ ssh_keys_public_keys[0]['src'] }} ~{{ ssh_keys_owner }}/.ssh/{{ ssh_keys_public_keys[0]['src'] | basename }}
+        && (echo 'Public key test: pass' && exit 0)
+        || (echo 'Public key test: fail' && exit 1)
+      changed_when: false
 
 - name: test presence of known hosts  # noqa command-instead-of-module
   ansible.builtin.shell: >
