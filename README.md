@@ -67,7 +67,7 @@ None
 ---
 - hosts: all
   roles:
-  - ssh-keys
+    - oefenweb.ssh-keys
   vars:
     ssh_keys_generate_keys:
       - path: ../../../files/ssh-keys/id_rsa
